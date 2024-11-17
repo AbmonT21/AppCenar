@@ -11,7 +11,4 @@ router.get("/Login",LoginController.GetLogin);
 
 
 
-
-
-
 module.exports = router;

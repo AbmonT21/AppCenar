@@ -5,7 +5,11 @@ const app = express();
 
 const NotFoundController = require("./controllers/NotFoundController");
 const LoginController = require("./controllers/LoginController");
-const homeController = require("./controllers/homeController")
+const RegistrerController = require("./controllers/RegistrerController");
+const RegistrerMarketController = require("./controllers/RegistrerMarketController");
+
+const homeController = require("./controllers/homeController");
+
 
 app.engine(
     "hbs",
@@ -24,6 +28,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/Login",LoginController.GetLogin);
+app.use("/Registrer",RegistrerController.GetRegistrer);
+app.use("/RegistrerMarket",RegistrerMarketController.GetRegistrer);
 app.use("/Home",homeController.GetHome);
 app.use(NotFoundController.Get404);
 

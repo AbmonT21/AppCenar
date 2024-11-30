@@ -8,15 +8,21 @@ const LoginController = require("./controllers/LoginController");
 const RegistrerController = require("./controllers/RegistrerController");
 const RegistrerMarketController = require("./controllers/RegistrerMarketController");
 const forgetAccountController = require("./controllers/forgetAccountController");
+
 const homeController = require("./controllers/homeController");
-const drinkController = require("./controllers/drinkController");
-const restaurantController = require("./controllers/restaurantController");
-const shopController = require("./controllers/shopController");
-const healthController = require("./controllers/healthController");
-const marketController = require("./controllers/marketController");
-const MisPedidosController = require("./controllers/MisPedidosController");
-const MisDireccionesController = require("./controllers/MisDireccionesController");
-const MisFavoritosController = require("./controllers/MisFavoritosController");
+const drinkController = require("./controllers/clientControllers/drinkController");
+const restaurantController = require("./controllers/clientControllers/restaurantController");
+const shopController = require("./controllers/clientControllers/shopController");
+const healthController = require("./controllers/clientControllers/healthController");
+const marketController = require("./controllers/clientControllers/marketController");
+const MisPedidosController = require("./controllers/clientControllers/MisPedidosController");
+const MisDireccionesController = require("./controllers/clientControllers/MisDireccionesController");
+const MisFavoritosController = require("./controllers/clientControllers/MisFavoritosController");
+
+const bussinesController = require("./controllers/bussinesControllers/homeController");
+const { Sequelize } = require("sequelize");
+const sequelize = require("./utils/database");
+
 
 
 
@@ -48,9 +54,17 @@ app.use("/health",healthController.GetHealth);
 app.use("/pedidos",MisPedidosController.GetPedidos);
 app.use("/favoritos",MisFavoritosController.GetFavoritos);
 app.use("/direcciones",MisDireccionesController.GetDirecciones);
+app.use("/Bussines",bussinesController.GetBussines);
+app.use("/Deliver",bussinesController.GetBussines);
+app.use("/Admin",bussinesController.GetBussines);
+
 app.use("/Home",homeController.GetHome);
 
 app.use(NotFoundController.Get404);
 
 
-app.listen(5001)
+sequelize.sync().then(result =>{
+  app.listen(5001);
+}).catch(err=>{
+  console.log(err);
+});

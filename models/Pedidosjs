@@ -1,0 +1,57 @@
+import { FOREIGNKEYS } from "sequelize/lib/query-types";
+import Usuarios from "./Usuarios";
+import Comercios from "./Comercios";
+
+const Sequelize = require("sequelize");
+const sequelize = require("../util/database");
+
+const Pedidos = sequelize.define("AppCenarDb", {
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    allowNull: false,
+    primaryKey: true
+  },
+  Usuarios_id: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    FOREIGNKEYS: Usuarios
+  },
+  Pedidos_id: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+      FOREIGNKEYS: Pedidos
+    },
+  Comercios_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        FOREIGNKEYS: Comercios
+      },
+  FechaHora: {
+    type: Sequelize.DATE,
+    allowNull: false,
+  },
+  Status: {
+        type: Sequelize.STRING,
+    allowNull: false,
+    },
+  DireccionEntrega: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  MetodoPago: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  Detalles: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  }
+
+  });
+
+module.exports = Pedidos;
+    
+
+
+
